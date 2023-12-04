@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>Sketchic</title>
+		<meta charset="utf-8" />
+
+		<!-- Responsividade -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+		<meta name="theme-color" content="black">
+
+		<!-- Folhas de estilo -->
+		<link rel="stylesheet" href="/style.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+		<!-- Adicionar manifest.json -->
+		<link rel="manifest" href="/manifest.json">
+
+	</head>
+	<body>
+		<h1>[App name] - [app function]</h1>
+		<h2></h2>
+
+		<div id="" class="loader-container"></div>
+
+		<!-- https://stackoverflow.com/questions/59577407/uncaught-in-promise-domexception-failed-to-execute-teximage2d-on-webgl2ren -->
+		<!-- <img crossorigin="anonymous" id="img" src="/resources/img/fifi.jpeg"></img> -->
+
+		<p id="status">Loading model...</p>
+
+		<div id="output" style="visibility: visible">
+			<h3 id="msg-resultado">Clique no botão "IA, o que eu desenhei?" e veja o que a IA acha que você desenhou!<br/>
+				<h4 id="resultado"></h4>
+			</h3>
+		</div>
+
+		<!-- Carregar TensorFlow.js -->
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+
+		<!-- Carregar modelo pré-treinado MobileNet. Aqui será definida uma variável 'mobilenet' que representa o modelo. -->
+		<!-- Ver readme em https://github.com/tensorflow/tfjs-models/tree/master/mobilenet -->
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+
+		<script src="/src/index.js"></script>
+
+		<!-- Progressive web app -->
+		<!-- <script src="/src/pwa.js"></script> -->
+		
+	</body>
+</html>

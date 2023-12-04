@@ -1,0 +1,185 @@
+/* para debug */
+/*
+* {
+    outline: 1px solid red;
+}
+*/
+
+body {
+    padding: 2% 5%;
+    font-family: helvetica, arial, sans-serif;
+    margin: 2em;
+}
+
+h1 {
+    font-style: italic;
+    color: lightgray;
+}
+
+h2 {
+    font-style: italic;
+    color: lightgray;
+}
+
+* {
+    background: rgb(32, 32, 32);
+    color: whitesmoke;
+    font-family: avenir, arial, helvetica, sans-serif;
+    border-radius: 0.5rem;
+    transition: 0.25s;
+}
+
+input, textarea {
+    padding: 0.5rem;
+    width: 100%;
+}
+
+input:hover,textarea:hover,input:focus,textarea:focus {
+    background: lime;
+    color: black;
+}
+
+a:hover,a:focus {
+    color: lime;
+}
+
+a:focus {
+    text-decoration: underline;
+}
+
+.disabled:hover {
+    background: rgb(255, 255, 255);
+    color: rgb(54, 34, 34);
+    cursor: not-allowed;
+}
+
+#spinner {
+    cursor: wait;
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+}
+
+canvas {
+    border-style: solid;
+    border-width: medium;
+    background-color: rgb(220, 220, 220);
+}
+
+.nav{
+    background: rgb(68, 68, 68);
+    width: 800px;
+    height: 75px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    opacity: .3;
+    transition: opacity .5s;
+}
+
+.nav:hover{
+    opacity: 1;
+}
+
+.clr{
+    height: 30px;
+    width: 30px;
+    background-color: blue;
+    border-radius: 50%;
+    border: 3px solid rgb(214, 214, 214);
+    transition: transform .5s;
+}
+.clr:hover{
+    transform: scale(1.2);
+}
+.clr:nth-child(1){
+    background-color: black;
+}
+.clr:nth-child(2){
+    background-color: red;
+}
+.clr:nth-child(3){
+    background-color: yellow;
+}
+.clr:nth-child(4){
+    background-color: lime;
+}
+.clr:nth-child(5){
+    background-color: white;
+}
+.clr:nth-child(6){
+    background-color: #2265c9;
+}
+.clr:nth-child(7){
+    background-color: gold;
+}
+.clr:nth-child(8){
+    background-color: beige;
+}
+.clr:nth-child(9){
+    background-color: orange;
+}
+.clr:nth-child(10){
+    background-color: turquoise;
+}
+.clr:nth-child(11){
+    background-color: brown;
+}
+.clr:nth-child(12){
+    background-color: #bd4a4a;
+}
+
+.tooltip {
+    position: relative;
+}
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: auto;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    padding: 3px 0;
+    opacity: .75;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+button{
+    border-style: solid;
+    padding: .6em 1em;
+    border-radius: 3px;
+    background-color: #03bb56;
+    color: #fff;
+}
+
+button:hover{
+    transform: scale(1.2);
+}
+
+.save{
+    background-color: #0f65d4;
+}
+
+.loader-container {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background: #000
+        url("https://media.giphy.com/media/8agqybiK5LW8qrG3vJ/giphy.gif") center
+        no-repeat;
+    z-index: 1;
+
+    display: none;
+}
