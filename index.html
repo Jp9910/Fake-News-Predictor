@@ -19,10 +19,22 @@
 
 	</head>
 	<body>
-		<h1>[App name] - [app function]</h1>
+		<img src="resources\img\newspaper.png" alt="image of a newspaper" width="600" height="500">
+		<h1>Fake news predictor - check if it's fake</h1>
 		<h2></h2>
 
 		<div id="" class="loader-container"></div>
+
+		<h2>Paste the news article here</h2>
+		<input
+			id="input-news"
+			type="text"
+			placeholder="News article"
+			value=""
+		/>
+		<button id="bt-predict">
+			Go
+		</button>
 
 		<!-- https://stackoverflow.com/questions/59577407/uncaught-in-promise-domexception-failed-to-execute-teximage2d-on-webgl2ren -->
 		<!-- <img crossorigin="anonymous" id="img" src="/resources/img/fifi.jpeg"></img> -->
@@ -30,10 +42,13 @@
 		<p id="status">Loading model...</p>
 
 		<div id="output" style="visibility: visible">
-			<h3 id="msg-resultado">Clique no botão "IA, o que eu desenhei?" e veja o que a IA acha que você desenhou!<br/>
-				<h4 id="resultado"></h4>
+			<h3 id="msg-resultado"> Click GO or press enter to see what the AI thinks 
+				<h4 id="resultado">
+				</h4>
 			</h3>
 		</div>
+
+		<p>!!! Disclaimer: this software is AI-based and will not necessarily reflect the truth. This only serves to give you an idea of if the article is fake or not based on previous known true and fake articles. </p>
 
 		<!-- Carregar TensorFlow.js -->
 		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>

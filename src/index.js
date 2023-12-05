@@ -10,19 +10,25 @@ let modelo;
 
 const STATUS = document.getElementById('status');
 STATUS.innerText = 'Loaded TensorFlow.js - version: ' + tf.version.tfjs;
-
+const INPUT = document.getElementById("input-news");
 const PREDICT_BUTTON = document.getElementById('bt-predict');
-const CANVAS = document.getElementById("canvas")
 const RESULT = document.getElementById("resultado")
-const MOBILE_NET_INPUT_WIDTH = 512;
-const MOBILE_NET_INPUT_HEIGHT = 512;
-const CLASS_NAMES = ["aurelion sol", "kindred", "teemo"];
-const ctx = CANVAS.getContext("2d");
+const CLASS_NAMES = ["REAL", "FAKE"];
+
+const loaderContainer = document.querySelector('.loader-container');
 const MSG_RESULTADO = document.getElementById("msg-resultado")
 
 PREDICT_BUTTON.addEventListener('click', predict);
-
-const loaderContainer = document.querySelector('.loader-container');
+INPUT.addEventListener("keypress", function (event) {
+	if (event.key === "Enter") {
+		if (INPUT.value.length == 0) {
+			alert("Write something");
+			return;
+		}
+		event.preventDefault();
+		predict();
+	}
+});
 
 // Chamar função async pra considerar o gif de loading
 // (async() => {
@@ -32,22 +38,13 @@ const loaderContainer = document.querySelector('.loader-container');
 // })();
 
 loadModel();
-setupCanvas();
-setupCanvasNavbar();
 
 async function predict() {
-	let imageAsTensor = tf.browser.fromPixels(CANVAS); // Parameters:
-													// 1 - pixels (ImageData|HTMLImageElement|HTMLCanvasElement|HTMLVideoElement) 
-													//	The input image to construct the tensor from. The supported image types are all 4-channel.
-													// 2 - numChannels (number) The number of channels of the output tensor. A numChannels 
-												 	//	value less than 4 allows you to ignore channels. Defaults to 3 (ignores alpha channel of input image)
-
-	let resized = tf.image.resizeBilinear(imageAsTensor, [MOBILE_NET_INPUT_HEIGHT, MOBILE_NET_INPUT_WIDTH], true);
-	let normalized = resized.div(255); // dividir por 255
-	const resultado = modelo.predict(normalized.expandDims()); // O resultado é um tensor do tensorflow
-
-	let prediction = resultado.squeeze(); //Removes dimensions of size 1 from the shape of a tensor.
-
+	let inputText = INPUT.value
+	input = [inputText]
+	console.log(input)
+	const resultado = modelo.predict([inputText]); // O resultado é um tensor do tensorflow
+	prediction = resultado.squeeze();
 	let highestIndex = prediction.argMax().arraySync(); // arraySync transforma o tensor em um array javascript
 	console.log("highestindex: ", highestIndex)
 
@@ -56,24 +53,23 @@ async function predict() {
 	console.log("Probabilidades: ", probabilidades)
 
 	RESULT.scrollIntoView({behavior: 'smooth'});
-	MSG_RESULTADO.innerText = "De acordo com nossa IA, você desenhou:"
-	RESULT.innerText = CLASS_NAMES[highestIndex] + ' (confiança de ' + (probabilidades[highestIndex]*100).toFixed(1) + '%)';
+	MSG_RESULTADO.innerText = "According to the model, this news article is "
+	RESULT.innerText = CLASS_NAMES[highestIndex] + ' (confidence of ' + (probabilidades[highestIndex]*100).toFixed(1) + '%)';
 }
 
-/**
- * Loads the MobileNet model and warms it up so ready for use.
- **/
 async function loadModel() {
-	const URL = 
-		'https://raw.githubusercontent.com/Jp9910/Projeto-AM/main/models/tensorflowjs/';
-
+	console.log('Loading model...')
+	const URL =
+	'https://raw.githubusercontent.com/Jp9910/NLP-Project/main/models/bert_classifierJS/content/tfjs_model/';
 	//https://js.tensorflow.org/api/latest/#loadGraphModel
+	
 	modelo = await tf.loadGraphModel(URL, {fromTFHub: true});
-	STATUS.innerText = 'Modelo carregado com sucesso!';
-
+	STATUS.innerText = 'Model loaded';
+	
+	console.log('Model loaded...')
 	// Warm up the model by passing zeros through it once.
 	tf.tidy(function () {
-	  let answer = modelo.predict(tf.zeros([1, MOBILE_NET_INPUT_HEIGHT, MOBILE_NET_INPUT_WIDTH, 3]));
+	  let answer = modelo.predict(["Aquecendo o modelo!","Aquecendo o modelo!","Aquecendo o modelo!"]);
 	  console.log(answer);
 	});
 }
